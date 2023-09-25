@@ -132,14 +132,21 @@ layer1_da.interp(lon=[65,66])
 ```
 
 ## Plotting
-Xarray uses `.plot()` method to visualize the retrieved data. There are three types of Xarray plots based on the dimension of the retrieved data:
+The simplest way to make a plot is to call the `.plot()` method on a DataArray. There are three types of Xarray plots based on the dimension of the retrieved data:
 - when data is 1D: Xarray makes a line plot
 - When data is 2D: Xarray makes a pcolormesh using matplotlib.pyplot.pcolormesh()
 - When data is 3D: Xarray makes histogram (probably not useful)
 
+Additional arguments are passed directly to the matplotlib function. For example, when the DataArray is 1D (a line plot), we can assign additional argument (color and marker, for example) of the line plot as below:
+```python
+DataArray.plot.line(color="purple", marker="o")
+```
 Note that Xarray usually uses a proper default labels/legend for the plots:
 ```python
 layer1_da.sel(time='2000-01-01').plot(cmap='jet')
+
+#or we can make it as as contourf plot by
+#layer1_da.sel(time='2000-01-01').plot.contourf(cmap='jet')
 ```
 ![image](https://github.com/AliForghani/Netcdf-with-Xarray/assets/22843733/af3ee22a-77f7-42db-83be-dd157da74e7d)
 
@@ -158,6 +165,8 @@ layer1_da.hvplot(groupby='time',cmap='jet', widget_type="scrubber", widget_locat
 ```
 
 ![image](https://github.com/AliForghani/Netcdf-with-Xarray/assets/22843733/40bbb61d-5da0-4c2f-8f77-9afe68035813)
+
+ See the comprehensive [plotting documentation](https://docs.xarray.dev/en/latest/user-guide/plotting.html) for details.
 
 
 
